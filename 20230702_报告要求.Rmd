@@ -1,0 +1,262 @@
+---
+title: "结题报告内容与要求"
+author: ""
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval=FALSE, echo = TRUE)
+```
+
+## <font color="blue"> 1. 绘图部分 </font>
+
+### 1.1 单图
+
+(1) 数据集 Automobile.csv 给出了205 辆汽车的相关数据，变量名称可在文件 Automobile-Names.txt 文件中找到. 将该数据集读入到 $\Re$ 中并命名为 Automobile. 找到表示汽车总重量的变量并命名为 curb_weight，再找到表示高速公路上每加仑汽油的行驶距离 (英里) 的变量并命名为 highway_mpg.
+
+```{r}
+## Write your code here.
+
+```
+
+(2) 利用 $\tt plot()$ 函数画高速公路上每加仑汽油的行驶距离 (highway_mpg) 关于汽车总重量 (curb_weight) 的散点图. 点用红色填充的三角形符号来表示. 给横轴标注 "Curb Weight"，纵轴标注 "Highway MPG"，并给图形添加一个合适的标题.
+
+```{r}
+## Write your code here.
+
+```
+
+(3) 假设我们做高速公路上每加仑汽油的行驶距离 (highway_mpg) 关于汽车总重量 (curb_weight) 的线性拟合以及二次曲线拟合，在 $\Re$ 中可以用以下代码实现
+
+```{r}
+fit.linear = lm(highway_mpg ~ curb_weight, data = Automobile)
+fit.quadratic = lm(highway_mpg ~ curb_weight + I(curb_weight^2), data = Automobile)
+```
+
+利用函数 $\tt abline()$，使用参数 $\tt fit.linear$，给上述散点图添加最佳线性拟合直线，选择线的类型为 "dotted"，线的宽度为 2，线的颜色为红色.
+
+```{r}
+## Write your code here.
+
+```
+
+(4) 利用函数 $\tt lines()$，在上述图形中添加二次拟合曲线，选择线的类型为 "long-dash"，线的宽度为 2，线的颜色为蓝色.
+
+```{r}
+## Write your code here.
+
+```
+
+### 1.2 多图
+
+(5) 在数据集 Automobile 当中，找到表示汽车引擎功率大小的变量并命名为 horsepower, 表示汽车价格的变量并命名为 price, 表示汽车引擎压缩比的变量并命名为 compression_ratio, 表示汽车轴距的变量并命名为 wheel_base. 
+
+```{r}
+## Write your code here.
+
+```
+
+(6) 利用 $\tt par()$ 函数中的参数 $\tt mfrow$，将绘图区域设置为$2 \times 2$ 的布局，分别绘制汽车价格 (price) 关于汽车重量 (curb_weight)、引擎功率 (horsepower)、引擎压缩比 (compression_ratio)以及汽车轴距 (wheel_base) 的散点图.
+
+```{r}
+## Write your code here.
+
+```
+
+(7) 比较上述图形当中的四张图，问汽车重量、引擎功率、引擎压缩比和轴距这四个变量，哪一个与汽车价格的关系最为显著？
+
+### 1.3 房屋轮廓图
+
+函数 $\tt house$ 的代码如下，它以点 $(x,~y)$ 为中心画了一个房屋的轮廓图.
+
+```{r}
+house=function(x, y, ...){
+  lines(c(x - 1, x + 1, x + 1, x - 1, x - 1),
+    c(y - 1, y - 1, y + 1, y + 1, y - 1), ...)
+  lines(c(x - 1, x, x + 1), c(y + 1, y + 2, y + 1), ...)
+  lines(c(x - 0.3, x + 0.3, x + 0.3, x - 0.3, x - 0.3),
+    c(y - 1, y - 1, y + 0.4, y + 0.4, y - 1), ...)
+}
+```
+
+(8) 在 $\Re$ 中键入函数 $\tt house$ 的上述代码.
+
+(9) 用函数 $\tt plot.new$ 打开一个新的绘图窗口. 利用函数 $\tt plot.window$ 设定横坐标和纵坐标均取值于 $0$ 至 $10$ 的范围.
+
+(10) 利用函数 $\tt house$ 在当前绘图窗口上分别绘制以点 $(1,~ 1),~ (4,~ 2),~ (7, ~6)$ 为中心的三个房屋.
+
+```{r}
+## Write your code here.
+
+```
+
+(11) 使用 $\ldots$ 参数可以为画直线的函数传递相关参数. 例如，我们希望使用加宽的直线画一个以 $(2,~7)$ 为中心的红色房屋轮廓，可以使用以下代码
+
+```{r}
+house(2, 7, col="red", lwd=3)
+```
+
+利用参数 $\tt col$ 和 $\tt lty$, 在当前绘图窗口再画三个不同位置、不同颜色以及不同直线类型的房屋轮廓.
+
+(12) 利用函数 $\tt box$ 在当前绘图窗口画一个边框.
+
+```{r}
+# Write your code here.
+
+```
+
+### 1.4 <font color="red"> lattice </font> 绘图包
+
+(13) 在数据集 Automobile 当中，找到表示汽车燃油类型 (diesel - 柴油, gas - 汽油) 的变量并命名为 fuel_type.
+
+```{r}
+# Write your code here.
+
+```
+
+(14) 利用 <font color="red"> lattice </font> 绘图包中的函数 $\tt bwplot()$, 按照汽车燃油类型分别绘制汽车价格的箱线图.
+
+```{r}
+# Write your code here.
+
+```
+
+(15) 利用 <font color="red"> lattice </font> 绘图包中的函数 $\tt densityplot()$, 按照汽车燃油类型分别绘制汽车价格的密度函数图.
+
+```{r}
+# Write your code here.
+
+```
+
+### 1.5 <font color="red"> ggplot2 </font> 绘图包
+
+(16) 如果一个数据框 $\tt dframe$ 包含有一个数值型变量 $\tt num.var$ 与一个因子变量 $\tt factor.var$. 在加载了 $\tt ggplot2$ 包之后，下述 $\Re$ 指令
+
+```{r}
+ggplot(dframe, aes(x = num.var, color = factor.var))
+      + geom_density()
+```
+
+则会根据因子变量 $\tt factor.var$ 的每一个取值, 分别绘制数值变量 $\tt num.var$ 相互重叠的密度曲线. 利用上述指令, 按照汽车燃油类型分别绘制汽车价格的密度函数图.
+
+```{r}
+# Write your code here.
+
+```
+
+(17) 对于含有一个数值型变量 $\tt num.var$ 与一个因子变量 $\tt factor.var$ 的数据框 $\tt dframe$, 下述 $\Re$ 指令
+
+```{r}
+ggplot(dframe, aes(y = num.var, x = factor.var))
+     + geom_boxplot()
+```
+
+则会根据因子变量 $\tt factor.var$ 的每一个取值, 在平行位置分别绘制数值变量 $\tt num.var$ 的箱线图. 利用上述指令，按照汽车燃油类型分别绘制汽车价格的平行箱线图.
+
+```{r}
+# Write your code here.
+
+```
+
+## <font color="blue"> 2. 数据的收集、预处理及可视化 </font>
+
+### 2.1 数据收集
+
+(18) 利用 OpenSky 网站，检索过去 $30$ 分钟内所有飞机的全部状态数据. 利用 $\tt data.table$ 包中的函数 $\tt fwrite()$, 将检索到的数据存储为文件名为 `学号-flights-raw.csv` 的文件. 该文件随报告一并提交.
+
+```{r}
+# Write your code here.
+
+```
+
+### 2.2 数据预处理
+
+(19) 重新命名变量以使其具有实际含义 (内容详见 OpenSky 网站中的 API 文档).
+
+```{r}
+# Write your code here.
+
+```
+
+(20) 其中一些变量，例如 $\tt sensors$, $\tt squawk$, $\tt spi$, $\tt position\_source$, 对我们而言技术性过强, 而 $\tt geo\_altitude$, $\tt last\_contact$, $\tt on\_ground$ 则可视作多余的变量, 因此我们可以删除这些变量.
+
+```{r}
+# Write your code here.
+
+```
+
+(21) 虽然变量 $\tt time\_position$ 是一个很好的结果，但却不符合常规. 审视 API 文档, 我们发现它是以 "Unix 时间戳" 显示的一个变量, 即自1970年1月1日始至今的秒数. 从计算的角度而言, 这一列很完美, 但为了直观清晰起见，请将其转换为日常使用的格式，例如 2023 年 7 月 1 日 10 时 20 分 30 秒.
+
+```{r}
+# Write your code here.
+
+```
+
+(22) 将经过上述预处理后的数据集存储为文件 `学号-flights.csv`, 并随报告一并提交.
+
+### 2.3 数据可视化
+
+假设数据预处理已完成，你得到的数据集为 $\tt flights$ (即上面的 `学号-flights.csv` 文件).
+
+(23) 作变量 $\tt baro\_altitude$ 的直方图. 由此你可以得出什么结论.
+
+```{r}
+# Write your code here.
+
+```
+
+(24) 依据变量 $\tt origin\_country$ 的不同值作变量 $\tt velocity$ 的一个箱线图. 由此你可以得出什么结论.
+
+```{r}
+# Write your code here.
+
+```
+
+(25) 如果 $\tt leaflet$ 包运行后可见，请利用 $\tt leaflet$ 包将所有飞机的位置标在一张地图上. 若 $\tt leaflet$ 包运行后不可见，则略过本题.
+
+```{r}
+# Write your code here.
+
+```
+
+## <font color="blue"> 3. 描述统计与多元统计 </font>
+
+上大学是否物有所值？数据集 $\tt earnings.csv$ 给出了建立回归模型所需的若干预测变量和背景信息.
+
+### 3.1 描述统计
+
+(26) 利用函数 $\tt mean()$ 和 $\tt median()$, 针对公立大学和私立大学，分别计算变量 $\tt Earn$ (收入) 的中心趋势度量. 将你的计算结果利用直方图、箱线图进行可视化. 哪一类大学的毕业生收入更高？
+
+```{r}
+# Write your code here.
+
+```
+
+### 3.2 相关系数
+
+(27) 计算数据集 $\tt earnings$ 中相关变量的相关系数矩阵. 利用 $\tt corrplot$ 包中的 $\tt corrplot()$ 函数对你的结果进行可视化. 哪些预测变量对于响应变量 $\tt Earn$ 有显著影响？
+
+```{r}
+# Write your code here.
+
+```
+
+### 3.3 多元回归模型
+
+(28) 将 $\tt Earn$ 作为响应变量, 利用 $lm()$ 函数拟合线性回归模型. 哪些预测变量对响应变量 $\tt Earn$ 具有最佳的预测效果？写出最终的拟合模型的回归方程.
+
+```{r}
+# Write your code here.
+
+```
+
+## <font color="blue"> 4. 报告要求 </font>
+
+(1) 报告格式：使用 R Markdown 来撰写你的结课报告. 简要描述所使用的模型、方法、得到的结论，包括详细的代码以及生成的图形等. 将最终的报告存储为 HTML 形式的文档. 
+
+(2) 结课报告文件命名格式: 学号_姓名.
+
+(3) 截止日期: 2023 年 7 月 10 日 24:00 时.
+
+(4) 注意: 若报告发送晚于规定时间，每迟发 3 小时将从总成绩当中扣除 5 分, 直至扣完为止.
